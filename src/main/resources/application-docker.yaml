@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: docker-k8s
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+
+  sql.init.mode: always
+

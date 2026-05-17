@@ -1,0 +1,2 @@
+INSERT INTO PRODUCT (id, name, description, price) VALUES (1, 'colgate-toothpaste', 'brush', 4.02);
+INSERT INTO PRODUCT (id, name, description, price) VALUES (2, 'Kirkland coconut water', 'hydrate', 30.15);
