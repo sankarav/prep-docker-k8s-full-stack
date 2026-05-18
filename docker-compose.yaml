@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: app:0.0.3
+    image: app:0.0.4
     ports:
       - "8080:8080"
     environment:
@@ -13,7 +13,9 @@ services:
       - SPRING_DATASOURCE_USERNAME=admin
       - SPRING_DATASOURCE_PASSWORD=secret
     depends_on:
-      - db
+#      - db
+      db:
+        condition: service_healthy      # ← wait until healthy, not just started
 
   db:
     image: postgres:16-alpine
@@ -23,3 +25,8 @@ services:
       - POSTGRES_PASSWORD=secret
     ports:
       - "5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U admin -d mydb" ]
+      interval: 5s       # check every 5 seconds
+      timeout: 5s        # each check must respond within 5s
+      retries: 5         # mark unhealthy after 5 failed attempts
