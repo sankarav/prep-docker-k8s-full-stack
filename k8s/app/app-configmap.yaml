@@ -7,4 +7,3 @@ metadata:
 data:
   POSTGRES_DB: appdb
   POSTGRES_USER: appuser
-  POSTGRES_PASSWORD: secret
