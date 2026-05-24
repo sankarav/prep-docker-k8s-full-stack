@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  labels:
+    app: full-stack
+    app-module: backend
+spec:
+  selector:
+    app: full-stack
+    app-module: backend
+  ports:
+    - port: 8080
+      targetPort: 8080
