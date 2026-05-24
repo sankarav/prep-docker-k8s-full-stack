@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  labels:
+    app: full-stack
+    app-module: backend
+spec:
+  replicas: 1 #FIXME: it cant be more than 1 due to a known error
+  selector:
+    matchLabels:
+      app: full-stack
+      app-module: backend
+  template:
+    metadata:
+      labels:
+        app: full-stack
+        app-module: backend
+    spec:
+      containers:
+        - name: backend
+          image: san.edu/backend:0.0.1
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: k8s
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: full-stack-config-map
+                  key: POSTGRES_USER
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: full-stack-secret
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: full-stack-config-map
+                  key: POSTGRES_DB
+            - name: SPRING_DATASOURCE_URL
+              # refer variable substitution here, and how it is not ${}
+              value: jdbc:postgresql://postgres-service:5432/$(POSTGRES_DB)
+

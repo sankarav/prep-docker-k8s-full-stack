@@ -1,0 +1,29 @@
+# Refer/Reading: https://claude.ai/chat/63a5ecfa-45a3-49ca-838c-9890d5126464
+
+# Maven build output - never needed, Docker rebuilds inside container
+target/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+
+# Git
+.git/
+.gitignore
+
+# Docker files themselves (no need to copy into context)
+Dockerfile
+.dockerignore
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Local env/config overrides
+*.env
+.env*
+
+# Logs
+*.log
+logs/

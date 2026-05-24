@@ -88,6 +88,7 @@
   </properties>
 
   <build>
+    <finalName>full-stack-backend-k8s</finalName>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
